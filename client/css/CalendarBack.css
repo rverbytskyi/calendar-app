@@ -1,0 +1,37 @@
+.hours-back{
+    margin-top: 50px;
+}
+
+.hour-row{
+    border-top: 1px solid #C9C8C8;
+    display: flex;
+    flex-direction: row;
+    min-height: 150px;
+}
+
+.hour-marks-col{
+    display: flex;
+    flex-direction: column;
+}
+
+p.hour-mark,
+p.half-hour-mark{
+    font-family: "Open-Sans";
+    font-weight: 200;
+    color: #808080;
+    margin: 0 0 0 15px;
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+.hour-mark{
+    font-size: 16px;
+}
+
+.half-hour-mark{
+    font-size: 12px;
+}
+
+.hour-event-area{
+    width: 200px;
+}

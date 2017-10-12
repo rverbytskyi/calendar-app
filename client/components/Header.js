@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CalendarEditor from './../components/CalendarEditor.jsx';
-import SignUp from './../components/SignUp.jsx';
+import CalendarEditor from './../containers/CalendarEditor.jsx';
+import SignUp from './../containers/SignUp.jsx';
 
 import css from './../css/Header.css';
 

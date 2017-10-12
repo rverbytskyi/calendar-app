@@ -1,13 +1,12 @@
 import C from './../constants/constants.js';
-import {v4} from 'uuid';
 
-export const addEvent = (title, start, duration, ampm) => {
+export function addEvent (title, start, duration, ampm, userId = "") {
   return {
     type: C.ADD_EVENT,
     title,
-    id: v4(),
     start,
     duration,
-    ampm
+    ampm,
+    userId
   }
 }

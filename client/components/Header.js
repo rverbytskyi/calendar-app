@@ -1,7 +1,8 @@
 import React from 'react';
 
-import CalendarEditor from './../containers/CalendarEditor.jsx';
-import SignUp from './../containers/SignUp.jsx';
+import AddEvent from './../containers/AddEvent.js';
+import SignUp from './SignUp.js';
+import User from './../containers/User.js';
 
 import css from './../css/Header.css';
 
@@ -25,8 +26,8 @@ class Header extends React.Component{
                         <li><i className="material-icons" data-toggle="modal" data-target="#signupModal">&#xE853;</i></li>
                     </ul>
                 </div>
-                <CalendarEditor />
-                <SignUp />
+                <AddEvent />
+                <User />
             </header>
         );
     }

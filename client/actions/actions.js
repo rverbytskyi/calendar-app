@@ -10,3 +10,17 @@ export function addEvent (title, start, duration, ampm, userId = "") {
     userId
   }
 }
+
+export function getCurrentUserId(filter){
+  return {
+    type: C.GET_CURRENT_USER,
+    filter
+  }
+}
+
+export function createUser(username){
+  return {
+    type: C.CREATE_USER,
+    username
+  }
+}

@@ -1,11 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
-
-import {addEvent} from './../actions/actions.js';
+import PropTypes from 'prop-types';
 
 import './../css/CalendarEditor.css';
 
-let CalendarEditor = ({dispatch}) => {
+const CalendarEditor = ({addEvent}) => {
 
   let title,
     start,
@@ -17,16 +15,21 @@ let CalendarEditor = ({dispatch}) => {
     if (!ampm.value.trim()) {
       ampm.value = "am"
     }
-    dispatch(addEvent(title.value, start.value, duration.value, ampm.value))
+    addEvent(title.value, start.value, duration.value, ampm.value)
     title.value = ''
     start.value = ''
     duration.value = ''
     ampm.value = 'am'
   }
 
+  const enableButton = () => {if (title.value.length > 0 && start.value.length > 0 && duration.value.length > 0){
+    //document.getElementById("add-event-submit-btn").disabled = false
+  }}
+
   const handleChange = (e) => {
     switch (e.target.name) {
       case "title":
+      enableButton()
         break;
       case "start":
         if ((e.target.value.length <= 2) && (!e.target.value.includes(":"))) {
@@ -36,11 +39,13 @@ let CalendarEditor = ({dispatch}) => {
         } else if (!(/^[0-9]{0,2}[:][0-9]{0,2}$/.test(e.target.value))) {
             e.target.value = e.target.value.slice(0, -1);
           }
+          enableButton()
         break;
       case "duration":
       if (!(/^[0-9]*$/.test(e.target.value))) {
         e.target.value = e.target.value.slice(0, -1);
       }
+      enableButton()
         break;
       case "ampm":
         break;
@@ -49,8 +54,6 @@ let CalendarEditor = ({dispatch}) => {
     }
 
   }
-
-  const isEnabled = title.value.length > 0 && start.value.length > 0 && duration.value.length > 0;
 
   return (
     <div className="modal fade" id="newEventModal" tabIndex="-1" role="dialog" aria-labelledby="newEventModalLabel" aria-hidden="true">
@@ -62,8 +65,9 @@ let CalendarEditor = ({dispatch}) => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form onSubmit={handleSubmit.bind(this)}>
           <div className="modal-body">
-            <form onSubmit={handleSubmit.bind(this)}>
+
               <div className="form-group">
                 <input className="form-control" type="text" name="title" ref={inp => {
                   title = inp
@@ -89,12 +93,13 @@ let CalendarEditor = ({dispatch}) => {
                   duration = inp
                 }} placeholder="Enter event duration in minutes" onChange={handleChange.bind(this)} required/>
               </div>
-            </form>
+
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary" disabled={!isEnabled} onClick={handleSubmit.bind(this)}>Add</button>
+            <button type="button" className="btn btn-primary" id="add-event-submit-btn" onClick={handleSubmit.bind(this)}>Add</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -102,22 +107,9 @@ let CalendarEditor = ({dispatch}) => {
   )
 }
 
-/*<div>
-  <form
-    onSubmit={handleSubmit.bind(this)}
-  >
-    <input
-      onChange={handleChange.bind(this)}
-      ref={nm => {
-        input = nm
-      }}
-    />
-    <button type="submit">
-      Add Todo
-    </button>
-  </form>
-</div>*/
+CalendarEditor.propTypes = {
+  addEvent: PropTypes.func.isRequired
+}
 
-CalendarEditor = connect()(CalendarEditor)
 
 export default CalendarEditor

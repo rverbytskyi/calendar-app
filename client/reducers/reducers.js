@@ -11,7 +11,7 @@ import {
 } from './../actions/actions.js';
 
 
-function events(state = {}, action) {
+function events(state = [], action) {
   switch (action.type) {
     case C.ADD_EVENT:
       return [
@@ -30,8 +30,42 @@ function events(state = {}, action) {
   }
 }
 
+function users(state = [], action) {
+  switch (action.type) {
+    case C.CREATE_USER:
+      return [
+          ...state,
+          {
+            id: v4(),
+            username: action.username
+          }
+        ]
+    default:
+      return state
+
+  }
+}
+
+function user(state = [], action) {
+  switch (action.type) {
+    case C.GET_CURRENT_USER:
+      return action.filter
+    case C.LOG_OUT:
+      return state.map(user =>
+        (user.id === action.id) ?
+        {} :
+        user
+      )
+    default:
+      return state
+
+  }
+}
+
 const calendarApp = combineReducers({
-  events
+  events,
+  users,
+  user
 })
 
 export default calendarApp

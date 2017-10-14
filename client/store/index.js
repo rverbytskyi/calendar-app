@@ -1,5 +1,8 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
+import throttle from 'lodash/throttle';
+
 import calendarApp from './../reducers/reducers.js';
+import {loadState, saveState} from './../localStorage/localStorage.js';
 
 const logger = store => next => action => {
   let result
@@ -17,8 +20,18 @@ const saver = store => next => action => {
   return result
 }
 
-const storeFactory = () =>
-  createStore(
-    calendarApp
-  )
-export default storeFactory
+const configureStore = () => {
+  const persistedState = loadState();
+  const store = createStore(
+    calendarApp,
+    persistedState
+  );
+
+  store.subscribe(throttle(() =>{
+    saveState({events: store.getState().events,
+    users: store.getState().users});
+    console.log(store.getState());
+  }, 1000));
+  return store;
+}
+export default configureStore

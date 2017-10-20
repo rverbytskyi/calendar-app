@@ -1,0 +1,15 @@
+.event{
+  max-width: 200px;
+  width: 100%;
+  background-color: #E2ECF5;
+  border-left: 2px solid #6E9ECF;
+  overflow: hidden;
+}
+.event-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+}

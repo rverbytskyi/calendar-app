@@ -1,22 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {v4} from 'uuid';
 
-const SignUp = ({createUser}) => {
+const SignUp = ({user,users,createUser,logIn}) => {
 
   let username
 
   const enableButton = () => {
     if (username.value.length > 0) {
       //document.getElementById("enter-username-btn").disabled = false
-      document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Log in as "+username.value
+      document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Log in as "+ username.value
+    } else {
+      document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Enter username"
     }
   }
 
   const handleAddUser = (e) => {
     e.preventDefault()
-    createUser(username.value)
-    console.log(username.value);
+    let id
+    //signUp(username.value)
+    users.find((el)=>{
+      if (el.username === username.value){
+        id = el.id
+      }
+    })
+    if (id){
+      logIn(id,username.value)
+    }else{
+      id = v4()
+      createUser(id, username.value)
+      logIn(id,username.value)
+    }
+
     username.value = ""
+    enableButton()
   }
 
   const handleChange = (e) => {
@@ -57,7 +74,18 @@ const SignUp = ({createUser}) => {
 }
 
 SignUp.propTypes = {
-  createUser: PropTypes.func.isRequired
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string
+    }).isRequired
+  ).isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.string,
+    username: PropTypes.string
+  }).isRequired,
+  createUser: PropTypes.func.isRequired,
+  logIn: PropTypes.func.isRequired
 }
 
 export default SignUp;

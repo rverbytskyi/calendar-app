@@ -1,18 +1,27 @@
 import { connect } from 'react-redux';
 
-import {createUser} from './../actions/actions.js';
+import {createUser, logIn} from './../actions/actions.js';
 
 import SignUp from './../components/SignUp.js';
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    user: state.user
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    createUser: (username) => {
-      dispatch(createUser(username))
+    createUser: (userId,username) => {
+      dispatch(createUser(userId,username))
+    },
+    logIn: (userId,username) => {
+      dispatch(logIn(userId,username))
     }
   }
 }
 
-const User = connect(null,mapDispatchToProps)(SignUp)
+const User = connect(mapStateToProps,mapDispatchToProps)(SignUp)
 
 export default User

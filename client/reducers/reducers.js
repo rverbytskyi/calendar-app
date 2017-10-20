@@ -36,7 +36,7 @@ function users(state = [], action) {
       return [
           ...state,
           {
-            id: v4(),
+            id: action.userId,
             username: action.username
           }
         ]
@@ -46,19 +46,19 @@ function users(state = [], action) {
   }
 }
 
-function user(state = [], action) {
+function user(state = {}, action) {
   switch (action.type) {
-    case C.GET_CURRENT_USER:
-      return action.filter
+    case C.LOG_IN:
+      return {
+        id: action.userId,
+        username: action.username
+      }
     case C.LOG_OUT:
-      return state.map(user =>
-        (user.id === action.id) ?
-        {} :
-        user
-      )
+      return []
+    case C.GET_CURRENT_USER:
+      return state
     default:
       return state
-
   }
 }
 

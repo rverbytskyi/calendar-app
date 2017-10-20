@@ -25,7 +25,8 @@ ReactDOM.render(
 );
 
 console.log(store.getState());
-
+/*
 store.dispatch(addEvent("ewfq","26","516","am"))
 store.dispatch(addEvent("ewfq","26","516","am"))
 store.dispatch(addEvent("ewfq","26","516","am"))
+*/

@@ -1,5 +1,69 @@
 .hours-back{
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: repeat(9, 150px);
+  width: 300px;
+}
+
+.hour-row{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  border-top: 1px solid #C9C8C8;
+  height: 150px;
+  grid-column: 1;
+}
+
+.half.hour-row{
+  display: table-row;
+  border-top: none;
+}
+
+.last.hour-row{
+  height: auto;
+}
+
+.hour-mark{
+  display: table-cell;
+  font-size: 16px;
+  grid-row: 1;
+}
+
+.half.hour-mark{
+  display: table-cell;
+  font-size: 12px;
+  grid-row: 2;
+}
+
+.hour-event-area{
+  border-top: 1px solid #C9C8C8;
+  grid-column: 2;
+}
+
+.half.hour-event-area{
+  border-top: none;
+}
+
+p.hour-mark,
+p.half.hour-mark{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    color: #808080;
+    margin: 0 0 0 15px;
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+
+/*.events-block {
+
+}
+
+.hours-back{
     margin-top: 50px;
+    position: relative;
+    top: 0;
+    left:0;
 }
 
 .hour-row{
@@ -34,4 +98,4 @@ p.half-hour-mark{
 
 .hour-event-area{
     width: 200px;
-}
+}*/

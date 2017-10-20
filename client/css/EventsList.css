@@ -1,0 +1,17 @@
+#events-list-container{
+  width: 100%;
+  height: 100%;
+  grid-column: 2;
+  grid-row: 1 / 10;
+  position: relative;
+}
+
+.event-group{
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  flex-direction: row-reverse;
+  flex: 1;
+  flex-wrap: nowrap;
+  position: absolute;
+}

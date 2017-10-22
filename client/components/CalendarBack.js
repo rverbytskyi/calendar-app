@@ -18,18 +18,7 @@ export default class CalendarBack extends React.Component {
   render() {
     let hourRows = [];
     const ready = this.state.ready;
-    const hourMarks = [
-      8,
-      9,
-      10,
-      11,
-      12,
-      1,
-      2,
-      3,
-      4,
-      5
-    ];
+    const hourMarks = [8,9,10,11,12,1,2,3,4,5];
     for (let i = 0; i < hourMarks.length; i++) {
       if (i !== (hourMarks.length - 1)) {
         hourRows.push(
@@ -58,6 +47,7 @@ export default class CalendarBack extends React.Component {
     }
     return (
       <div className="events-block">
+        <h1>Calendar App</h1>
         <div className="hours-back">
           {hourRows}
 
@@ -67,7 +57,6 @@ export default class CalendarBack extends React.Component {
                   : <span>eqv</span>
               }
               </div>
-
         </div>
       </div>
     );

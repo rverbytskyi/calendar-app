@@ -102,22 +102,6 @@ let CalendarEditor = ({dispatch}) => {
   )
 }
 
-/*<div>
-  <form
-    onSubmit={handleSubmit.bind(this)}
-  >
-    <input
-      onChange={handleChange.bind(this)}
-      ref={nm => {
-        input = nm
-      }}
-    />
-    <button type="submit">
-      Add Todo
-    </button>
-  </form>
-</div>*/
-
 CalendarEditor = connect()(CalendarEditor)
 
 export default CalendarEditor

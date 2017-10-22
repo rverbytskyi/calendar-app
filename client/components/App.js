@@ -11,7 +11,6 @@ export default class App extends React.Component{
       <div className="app-container">
         <Header />
         <div className="container">
-          <h1>Privet</h1>
           <CalendarBack />
         </div>
       </div>

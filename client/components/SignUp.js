@@ -2,13 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {v4} from 'uuid';
 
-const SignUp = ({user,users,createUser,logIn}) => {
+const SignUp = ({user,users,createUser,logIn,logOut}) => {
 
   let username
 
+  const currentUser = () => {
+    if ((user==={})||(user===undefined)){
+      return "Please enter your name"
+    } else {
+      return "You're logged in as " + user.username
+    }
+  }
+
   const enableButton = () => {
     if (username.value.length > 0) {
-      //document.getElementById("enter-username-btn").disabled = false
       document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Log in as "+ username.value
     } else {
       document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Enter username"
@@ -18,7 +25,6 @@ const SignUp = ({user,users,createUser,logIn}) => {
   const handleAddUser = (e) => {
     e.preventDefault()
     let id
-    //signUp(username.value)
     users.find((el)=>{
       if (el.username === username.value){
         id = el.id
@@ -48,7 +54,7 @@ const SignUp = ({user,users,createUser,logIn}) => {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Please create user</h5>
+            <h5 className="modal-title">{currentUser()}</h5>
             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -85,7 +91,8 @@ SignUp.propTypes = {
     username: PropTypes.string
   }).isRequired,
   createUser: PropTypes.func.isRequired,
-  logIn: PropTypes.func.isRequired
+  logIn: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired
 }
 
 export default SignUp;

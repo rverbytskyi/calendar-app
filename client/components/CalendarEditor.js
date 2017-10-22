@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './../css/CalendarEditor.css';
-
 const CalendarEditor = ({user, addEvent}) => {
 
   let title,
@@ -93,10 +91,6 @@ const CalendarEditor = ({user, addEvent}) => {
 
     }
   }
-
-  const enableButton = () => {if (title.value.length > 0 && start.value.length > 0 && duration.value.length > 0){
-    //document.getElementById("add-event-submit-btn").disabled = false
-  }}
 
   const handleChange = (e) => {
     switch (e.target.name) {

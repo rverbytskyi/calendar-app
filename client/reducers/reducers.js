@@ -1,14 +1,8 @@
-import {
-  combineReducers
-} from 'redux'
-import {
-  v4
-} from 'uuid';
+import {combineReducers} from 'redux'
+import {v4} from 'uuid';
 
 import C from './../constants/constants.js';
-import {
-  addEvent
-} from './../actions/actions.js';
+import {addEvent} from './../actions/actions.js';
 
 
 function events(state = [], action) {
@@ -27,7 +21,11 @@ function events(state = [], action) {
         }
       ]
     case C.REMOVE_EVENT:
-      return state.map(event => (event.id===action.id)?event.removed=true:event)
+      return state.map(event =>
+        (event.id===action.id)
+        ? {...event, removed: true}
+        : event
+      )
     default:
       return state
   }

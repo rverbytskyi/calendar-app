@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => {
     },
     logIn: (userId,username) => {
       dispatch(logIn(userId,username))
+    },
+    logOut: () => {
+      dispatch(logOut())
     }
   }
 }

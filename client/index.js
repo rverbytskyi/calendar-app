@@ -10,11 +10,6 @@ import configureStore from './store';
 import App from './components/App.js';
 
 
-
-/*let store = createStore(
-  calendarApp
-);*/
-
 const store = configureStore();
 
 ReactDOM.render(
@@ -25,8 +20,3 @@ ReactDOM.render(
 );
 
 console.log(store.getState());
-/*
-store.dispatch(addEvent("ewfq","26","516","am"))
-store.dispatch(addEvent("ewfq","26","516","am"))
-store.dispatch(addEvent("ewfq","26","516","am"))
-*/

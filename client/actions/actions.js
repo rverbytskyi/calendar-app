@@ -39,9 +39,3 @@ export function logOut(){
     type: C.LOG_OUT
   }
 }
-
-export function getEvents(){
-  return {
-    type: C.EXPORT_EVENTS
-  }
-}

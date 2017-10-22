@@ -50,11 +50,10 @@ export default class CalendarBack extends React.Component {
         <h1>Calendar App</h1>
         <div className="hours-back">
           {hourRows}
-
             <div id="events-list-container">
             {(ready)?
                 <UserEvents/>
-                  : <span>eqv</span>
+                  : <span>Please wait</span>
               }
               </div>
         </div>

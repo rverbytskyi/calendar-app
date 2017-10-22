@@ -19,4 +19,4 @@ ReactDOM.render(
   , document.getElementById("render-target")
 );
 
-console.log(store.getState());
+//console.log(store.getState());

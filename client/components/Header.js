@@ -4,6 +4,7 @@ import AddEvent from './../containers/AddEvent.js';
 import SignUp from './SignUp.js';
 import User from './../containers/User.js';
 
+
 import css from './../css/Header.css';
 
 class Header extends React.Component{
@@ -19,7 +20,7 @@ class Header extends React.Component{
                             <i className="material-icons">&#xE2C4;</i>
                         </li>
                         <li>
-                            <i className="material-icons">&#xE2C6;</i>
+                          <i className="material-icons">&#xE2C6;</i>
                         </li>
                     </ul>
                     <ul className="right-side">

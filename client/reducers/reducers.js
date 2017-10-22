@@ -22,9 +22,12 @@ function events(state = [], action) {
           start: action.start,
           duration: action.duration,
           ampm: action.ampm,
-          userId: action.userId
+          userId: action.userId,
+          removed: false
         }
       ]
+    case C.REMOVE_EVENT:
+      return state.map(event => (event.id===action.id)?event.removed=true:event)
     default:
       return state
   }
@@ -54,9 +57,7 @@ function user(state = {}, action) {
         username: action.username
       }
     case C.LOG_OUT:
-      return []
-    case C.GET_CURRENT_USER:
-      return state
+      return {}
     default:
       return state
   }

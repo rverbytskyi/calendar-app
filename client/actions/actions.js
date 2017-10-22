@@ -11,17 +11,10 @@ export function addEvent (title, start, duration, ampm, userId = "") {
   }
 }
 
-export function checkUserExistance(username){
+export function delEvent (id) {
   return {
-    type: C.CHECK_USER,
-    username
-  }
-}
-
-export function signUp(username){
-  return {
-    type: C.CREATE_USER,
-    username
+    type:C.REMOVE_EVENT,
+    id
   }
 }
 
@@ -44,5 +37,11 @@ export function logIn(userId,username){
 export function logOut(){
   return {
     type: C.LOG_OUT
+  }
+}
+
+export function getEvents(){
+  return {
+    type: C.EXPORT_EVENTS
   }
 }

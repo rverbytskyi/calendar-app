@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Event from './Event.js';
 import css from './../css/EventsList.css';
 
-const EventsList = ({events}) => {
+const EventsList = ({events, delEvent}) => {
 
   let eventsGroups, eventsInGroups
   let dimension = document.getElementById("events-list-container").clientHeight/540;
@@ -31,8 +31,6 @@ const EventsList = ({events}) => {
   }
 
   const isConflicting = (ev, ev2f) => {
-    //let coef = (event.start-eventToFilter.start)/Math.abs(event.start-eventToFilter.start)
-    //console.log(eventToFilter);
     let diff = ev.start - ev2f.start
     if (diff <= 0){
       if ((ev.duration + diff) > 0){
@@ -81,7 +79,7 @@ const EventsList = ({events}) => {
         eventsInGroups.map((eventsGroup, index) => (
           <div key={"event-group-"+index} className="event-group" style={{top: calcTopPos(eventsGroup[0].start)}}>
             {eventsGroup.map(event =>(
-              <Event key={event.id} event={event} earliest = {eventsGroup[0].start}/>
+              <Event key={event.id} event={event} earliest = {eventsGroup[0].start} delEvent = {() => delEvent(event.id)}/>
             ))}
           </div>
         ))
@@ -99,9 +97,11 @@ EventsList.propTypes = {
       start: PropTypes.number,
       duration: PropTypes.number,
       ampm: PropTypes.string,
-      userId: PropTypes.string
+      userId: PropTypes.string,
+      removed: PropTypes.bool
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  delEvent: PropTypes.func.isRequired
 }
 
 export default EventsList

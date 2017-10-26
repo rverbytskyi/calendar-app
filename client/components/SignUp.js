@@ -14,7 +14,7 @@ const SignUp = ({user,users,createUser,logIn,logOut}) => {
     }
   }
 
-  const enableButton = () => {
+  const buttonText = () => {
     if (username.value.length > 0) {
       document.getElementById("enter-username-btn").childNodes[0].nodeValue = "Log in as "+ username.value
     } else {
@@ -24,29 +24,16 @@ const SignUp = ({user,users,createUser,logIn,logOut}) => {
 
   const handleAddUser = (e) => {
     e.preventDefault()
-    let id
-    users.find((el)=>{
-      if (el.username === username.value){
-        id = el.id
-      }
-    })
-    if (id){
-      logIn(id,username.value)
-    }else{
-      id = v4()
-      createUser(id, username.value)
-      logIn(id,username.value)
-    }
-
+    createUser(username.value)
     username.value = ""
-    enableButton()
+    buttonText()
   }
 
   const handleChange = (e) => {
     if (!(/^[0-9a-zA-Z ]{0,32}$/.test(e.target.value))) {
       e.target.value = e.target.value.slice(0, -1);
     }
-    enableButton()
+    buttonText()
   }
 
   return (

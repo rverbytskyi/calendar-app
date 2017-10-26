@@ -1,8 +1,23 @@
 import C from './../constants/constants.js';
+import {v4} from 'uuid';
+import * as eventsApi from './../api/eventApi.js';
+import * as userApi from './../api/userApi.js';
 
 export function addEvent (title, start, duration, ampm, userId = "") {
+  let id = v4();
+  return function(dispatch){
+    return eventsApi.addEvent({id: id, title: title, start: start, duration: duration, ampm: ampm, userId: userId}).then(
+      dispatch(addEventSuccess(id, title, start, duration, ampm, userId))
+    ).catch(err => {
+      throw(err)
+    })
+  }
+}
+
+export function addEventSuccess (id, title, start, duration, ampm, userId = "") {
   return {
     type: C.ADD_EVENT,
+    id,
     title,
     start,
     duration,
@@ -18,11 +33,19 @@ export function delEvent (id) {
   }
 }
 
-export function createUser(userId,username){
-  return {
-    type: C.CREATE_USER,
-    userId,
-    username
+export function createUser(username){
+  return function(dispatch){
+    return userApi.signIn({username: username}).then(response => {
+      if (response.data === ""){
+        userApi.signIn({username: username}).then(response => {
+          dispatch(logIn(response.data._id, response.data.username))
+        }).catch(err => {throw(err)})
+      } else {
+        dispatch(logIn(response.data._id, response.data.username))
+      }
+    }).catch(err => {
+      throw(err)
+    })
   }
 }
 
@@ -37,5 +60,22 @@ export function logIn(userId,username){
 export function logOut(){
   return {
     type: C.LOG_OUT
+  }
+}
+
+export function loadEventsSuccess(events) {
+  return {
+    type: C.LOAD_EVENTS,
+    events
+  }
+}
+
+export function loadEvents(userId){
+  return function(dispatch) {
+    return eventsApi.getEvents(userId).then(events => {
+      dispatch(loadEventsSuccess(events))
+    }).catch(error => {
+      throw(error)
+    })
   }
 }

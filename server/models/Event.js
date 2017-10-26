@@ -1,12 +1,18 @@
-import Mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
-const Schema = Mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
+    _id: {type: String, required: true},
     title: {type: String},
-    start: {type: String, required: true},
+    start: {type: Number, required: true},
     duration: {type: Number, required: true},
     ampm: {type: String, required: true},
+    userId: {type: String, required: true}
 });
 
-const Event = Mongoose.model('Event', EventSchema);
+EventSchema.query.byUserId = function(userId) {
+  return this.find({userId: userId});
+};
+
+const Event = mongoose.model('Event', EventSchema);

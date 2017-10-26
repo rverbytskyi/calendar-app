@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux'
-import {v4} from 'uuid';
 
 import C from './../constants/constants.js';
 import {addEvent} from './../actions/actions.js';
@@ -7,11 +6,13 @@ import {addEvent} from './../actions/actions.js';
 
 function events(state = [], action) {
   switch (action.type) {
+    case C.LOAD_EVENTS:
+      return action.events
     case C.ADD_EVENT:
       return [
         ...state,
         {
-          id: v4(),
+          id: action.id,
           title: action.title,
           start: action.start,
           duration: action.duration,

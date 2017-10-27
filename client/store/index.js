@@ -9,25 +9,29 @@ import {loadState, saveState} from './../localStorage/localStorage.js';
 
 const configureStore = () => {
   const persistedState = loadState();
-  console.log(persistedState.user);
-  const reducer = asyncInitialState.outerReducer(combineReducers({calendarApp, asyncInitialState: asyncInitialState.innerReducer}))
-  const loadStore = () => {
+  const reducer = asyncInitialState.outerReducer(calendarApp);
+  const loadStore = (persistedState) => {
     return new Promise(resolve => {
-      eventsApi.getEvents(persistedState.user.id).then(events => resolve({
-        ...persistedState,
-        events: events
-      }))
-      console.log(resolve);
-      return resolve
-    })
+      eventsApi.getEvents(persistedState.user.id)
+        .then(response => response.data)
+        .then(events => { //console.log(events);
+          resolve({
+            ...persistedState,
+            events: events
+          })
+        });
+    });
   }
   const store = createStore(
-    calendarApp,
-    compose(applyMiddleware(thunk,asyncInitialState.middleware(loadStore)))
+    reducer,
+    persistedState,
+    compose(applyMiddleware(asyncInitialState.middleware(loadStore),thunk))
   );
 
-  store.subscribe(throttle(() =>{
-    saveState({user: store.getState().user});
+  store.subscribe(throttle(() => {
+    saveState({
+      user: store.getState().user
+    });
     console.log(store.getState());
   }, 1000));
   return store;

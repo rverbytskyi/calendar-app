@@ -135,9 +135,9 @@ const CalendarEditor = ({user, addEvent}) => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form onSubmit={handleSubmit.bind(this)}>
-          <div className="modal-body">
 
+          <div className="modal-body">
+<form onSubmit={handleSubmit.bind(this)}>
               <div className="form-group">
                 <input className="form-control" type="text" name="title" id="event-title-inp" ref={inp => {
                   title = inp
@@ -163,13 +163,13 @@ const CalendarEditor = ({user, addEvent}) => {
                   duration = inp
                 }} placeholder="Enter event duration in minutes" onChange={handleChange.bind(this)} required/>
               </div>
-
+</form>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={resetDefault(["event-title-inp","event-start-inp","event-duration-inp","event-ampm-inp"])}>Close</button>
-            <button type="button" className="btn btn-primary" id="add-event-submit-btn" onClick={handleSubmit.bind(this)}>Add</button>
+            <button type="submit" className="btn btn-primary" id="add-event-submit-btn" onClick={handleSubmit.bind(this)}>Add</button>
           </div>
-          </form>
+
         </div>
       </div>
     </div>

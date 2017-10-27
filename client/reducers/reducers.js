@@ -12,7 +12,7 @@ function events(state = [], action) {
       return [
         ...state,
         {
-          id: action.id,
+          _id: action.id,
           title: action.title,
           start: action.start,
           duration: action.duration,
@@ -23,28 +23,12 @@ function events(state = [], action) {
       ]
     case C.REMOVE_EVENT:
       return state.map(event =>
-        (event.id===action.id)
+        (event._id===action.id)
         ? {...event, removed: true}
         : event
       )
     default:
       return state
-  }
-}
-
-function users(state = [], action) {
-  switch (action.type) {
-    case C.CREATE_USER:
-      return [
-          ...state,
-          {
-            id: action.userId,
-            username: action.username
-          }
-        ]
-    default:
-      return state
-
   }
 }
 
@@ -64,7 +48,6 @@ function user(state = {}, action) {
 
 const calendarApp = combineReducers({
   events,
-  users,
   user
 })
 

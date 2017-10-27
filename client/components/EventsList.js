@@ -19,7 +19,7 @@ const EventsList = ({events, delEvent}) => {
       let eventGroup = []
       for (let i=(evCopy.length-1); i>=0; i--){
         if (isConflicting(event, evCopy[i])){
-          eventGroup.push(evCopy[i].id)
+          eventGroup.push(evCopy[i]._id)
           evCopy.splice(i,1)
         }
       }
@@ -31,6 +31,7 @@ const EventsList = ({events, delEvent}) => {
   }
 
   const isConflicting = (ev, ev2f) => {
+
     let diff = ev.start - ev2f.start
     if (diff <= 0){
       if ((ev.duration + diff) > 0){
@@ -57,7 +58,7 @@ const EventsList = ({events, delEvent}) => {
 
   const findInNested = eventId => {
     for (let i=0; i<events.length; i++){
-      if (events[i].id === eventId)
+      if (events[i]._id === eventId)
       return events[i]
     }
   }
@@ -79,7 +80,7 @@ const EventsList = ({events, delEvent}) => {
         eventsInGroups.map((eventsGroup, index) => (
           <div key={"event-group-"+index} className="event-group" style={{top: calcTopPos(eventsGroup[0].start)}}>
             {eventsGroup.map(event =>(
-              <Event key={event.id} event={event} earliest = {eventsGroup[0].start} delEvent = {() => delEvent(event.id)}/>
+              <Event key={event._id} event={event} earliest = {eventsGroup[0].start} delEvent = {() => delEvent(event._id)}/>
             ))}
           </div>
         ))
@@ -92,7 +93,7 @@ const EventsList = ({events, delEvent}) => {
 EventsList.propTypes = {
   events: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      _id: PropTypes.string,
       title: PropTypes.string,
       start: PropTypes.number,
       duration: PropTypes.number,

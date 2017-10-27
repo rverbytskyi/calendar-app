@@ -20,17 +20,13 @@ conn.once('open', function() {
 });
 
 export function listEvents(userId="") {
-  console.log("user id is: ", userId);
   return Event.find().byUserId(userId).exec(function(err, events) {
     if (err) return console.error(err);
 });
 }
 
-export function findUser(data) {
-  return User.find().byName(data.username).exec(function(err, user) {
-    if (err) return console.error(err);
-    if (user) return true;
-  })
+export function exportEvents(userId) {
+  return Event.find({userId: userId}).select({"start":1,"duration":1,"title":1,"_id":0})
 }
 
 export function createEvent(data) {
@@ -45,7 +41,7 @@ export function createEvent(data) {
   return event.save();
 }
 
-export function createUser(id, username) {
+export function createUser(username) {
   console.log("user was created");
   const user = new User({
     username: username
@@ -54,7 +50,7 @@ export function createUser(id, username) {
 }
 
 export function signIn(data) {
-  return User.findOne().byUserName(data.username).exec(function(err, user) {
+  return User.findOne({username:data.username}).exec(function(err, user) {
     if (err) return console.error(err);
     if (user===null) {
       createUser(data.username)

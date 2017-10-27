@@ -6,7 +6,6 @@ import SignUp from './../components/SignUp.js';
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users,
     user: state.user
   }
 }
@@ -15,12 +14,6 @@ const mapDispatchToProps = dispatch => {
   return {
     createUser: (userId,username) => {
       dispatch(createUser(userId,username))
-    },
-    logIn: (username) => {
-      dispatch(logIn(username))
-    },
-    logOut: () => {
-      dispatch(logOut())
     }
   }
 }

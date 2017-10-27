@@ -27,6 +27,16 @@ export function addEventSuccess (id, title, start, duration, ampm, userId = "") 
 }
 
 export function delEvent (id) {
+  return function(dispatch){
+    return eventsApi.deleteEvent(id).then(
+      dispatch(removeEvent(id)))
+      .catch(err => {
+      throw(err)
+    })
+  }
+}
+
+export function removeEvent (id) {
   return {
     type:C.REMOVE_EVENT,
     id
@@ -39,9 +49,12 @@ export function createUser(username){
       if (response.data === ""){
         userApi.signIn({username: username}).then(response => {
           dispatch(logIn(response.data._id, response.data.username))
+          console.log(response.data._id);
+          dispatch(loadEvents(response.data._id))
         }).catch(err => {throw(err)})
       } else {
-        dispatch(logIn(response.data._id, response.data.username))
+        dispatch(logIn(response.data._id, response.data.username));
+        dispatch(loadEvents(response.data._id))
       }
     }).catch(err => {
       throw(err)
@@ -73,7 +86,7 @@ export function loadEventsSuccess(events) {
 export function loadEvents(userId){
   return function(dispatch) {
     return eventsApi.getEvents(userId).then(events => {
-      dispatch(loadEventsSuccess(events))
+      dispatch(loadEventsSuccess(events.data))
     }).catch(error => {
       throw(error)
     })

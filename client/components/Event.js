@@ -25,13 +25,13 @@ const Event = ({event,earliest, delEvent}) => {
 
 Event.propTypes = {
   event: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     start: PropTypes.number.isRequired,
     duration: PropTypes.number.isRequired,
     ampm: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
-    removed: PropTypes.bool.isRequired
+    removed: PropTypes.bool
   }).isRequired,
   earliest: PropTypes.number.isRequired,
   delEvent: PropTypes.func.isRequired

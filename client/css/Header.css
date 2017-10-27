@@ -4,6 +4,11 @@
     height: 50px;
 }
 
+.menu a{
+  text-decoration: none;
+  color: inherit;
+}
+
 .menu{
     padding-left: 15px;
     padding-right: 15px;

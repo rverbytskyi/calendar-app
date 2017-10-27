@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {v4} from 'uuid';
 
-const SignUp = ({user,users,createUser,logIn,logOut}) => {
+const SignUp = ({user,createUser}) => {
 
   let username
 
@@ -67,19 +67,11 @@ const SignUp = ({user,users,createUser,logIn,logOut}) => {
 }
 
 SignUp.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      username: PropTypes.string
-    }).isRequired
-  ).isRequired,
   user: PropTypes.shape({
     id: PropTypes.string,
     username: PropTypes.string
   }).isRequired,
-  createUser: PropTypes.func.isRequired,
-  logIn: PropTypes.func.isRequired,
-  logOut: PropTypes.func.isRequired
+  createUser: PropTypes.func.isRequired
 }
 
 export default SignUp;
